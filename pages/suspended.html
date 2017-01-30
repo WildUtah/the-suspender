@@ -1,0 +1,77 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <script>
+      const query = window.location.search;
+
+      function getParamByName (name) {
+        const param_regex = new RegExp("[?&]" + name + "(=([^;&#]*)|&|;|#|$)");
+        const result = param_regex.exec(query);
+        if(!result) return null;
+        if(!result[2]) return '';
+        return decodeURIComponent(result[2]);
+      }
+      const title = getParamByName('title');
+      const realURL = getParamByName('url');
+
+      //Set title to match original page
+      document.title = "Suspended: " + title;
+
+      //return to the unsuspended page
+      function unsuspend() {
+        //back is better because it preserves more state
+        history.back();
+        //but if there's no history (on a reloaded session?) then
+        //there's no subsititute for just setting the url.
+        //but we have to let the function finish to see if back() works,
+        //so we'll wait 50ms before insisting.
+        setTimeout(() => window.location.href=realURL, 50);
+      }
+    </script>
+
+    <style>
+      body { 
+        background-color: #aaffe1;
+        text-align: center;
+        font-family: "San Francisco";
+      }
+      a {
+        color: #33F;
+      }
+
+      #footer {
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        height: 2em;
+        width: 100%;
+      }
+
+      .variable {
+        color: #646;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>Webpage Suspended</h2>
+
+    <p><a target="_blank" 
+      href="https://utahbrian.com/the-suspender">The Suspender</a> 
+      has suspended this page titled:</p>
+
+    <script>document.write('<h2 class="variable">"'+ title + '"</h2>');</script>
+
+    <p>From URL:</p>
+
+    <script>document.write('<p class="variable">' + realURL + '</p>');</script>
+
+    <h1><a href="javascript:unsuspend()">Click here to unsuspend this page.</a></h1>
+
+    <div id="footer">
+     Visit <a target="_blank" 
+        href="https://utabrian.com/the-suspender">The Suspender</a> 
+      online.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Brian Watkins</string>
+	<key>Builder Version</key>
+	<string>11602.4.8.0.1</string>
+	<key>CFBundleDisplayName</key>
+	<string>The Suspender</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.Vocab7.thesuspender</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<integer>0</integer>
+		<key>Global Page</key>
+		<string>pages/basic.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>suspend</string>
+				<key>Identifier</key>
+				<string>suspend</string>
+				<key>Image</key>
+				<string>assets/toolbar.png</string>
+				<key>Include By Default</key>
+				<true/>
+				<key>Label</key>
+				<string>The Suspender</string>
+				<key>Palette Label</key>
+				<string>The Suspender</string>
+				<key>Tool Tip</key>
+				<string>Suspend This Page</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Description</key>
+	<string>Suspend tabs in the background</string>
+	<key>DeveloperIdentifier</key>
+	<string>QMHYRDLA7A</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>https://utahbrian.com/the-suspender</string>
+</dict>
+</plist>

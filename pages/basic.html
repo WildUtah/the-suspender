@@ -1,0 +1,53 @@
+<DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function suspend(event) {
+        //the window to suspend is event.target.browserWindow
+        if(event.command === "suspend" ||
+            event.command === "suspend-context") {
+          const tab = event.target.browserWindow.activeTab;
+          tab.url = 
+            safari.extension.baseURI + "pages/suspended.html?" +
+            "url=" + encodeURIComponent(tab.url) + "&" +
+            "title=" + encodeURIComponent(tab.title); 
+        }
+      }
+
+      function validateSuspend(event) {
+        if(event.command === "suspend") {
+          event.target.disabled = !event.target.browserWindow.activeTab.url;
+        }
+      }
+
+      //check if a suspender tab is reloading and make sure it has
+      //the current URL (e.g. on a Safari shutdown and reload)
+      function beforeNavigate (event) {
+        //are we being reloaded with old URL?
+        if(event.url &&
+           event.url.startsWith(
+                "safari-extension://com.Vocab7.thesuspender-QMHYRDLA7A") &&
+           !event.url.startsWith(safari.extension.baseURI)) {
+        
+         //URLs are rewritten to prevent malicious sites from fooling with
+         //your extension. But The Suspender would just display a 
+         //suspended tab.
+         event.preventDefault();
+
+         const realURI = event.url.substring(event.url.indexOf('?'));
+         const realURL = safari.extension.baseURI + "pages/suspended.html" +
+                         realURI;
+         event.target.url = realURL;
+        }
+      }
+
+      safari.application.addEventListener("command", suspend, false);
+      safari.application.addEventListener("validate", validateSuspend, false);
+      safari.application.addEventListener("beforeNavigate", beforeNavigate, 
+          true);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
